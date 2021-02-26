@@ -7,7 +7,6 @@ namespace _8Puzzles
     public class Nodo
     {
         public int[,] Conjunto = new int[3, 3];
-        public List<Nodo> hijos = new List<Nodo>();
 
         public Nodo(int[,] Conjunto)
         {
@@ -18,15 +17,36 @@ namespace _8Puzzles
         {
         }
 
-        public void ObtenerNodosSucesores(Nodo nodo)
+        public List<Nodo> ObtenerNodosHijos(Nodo nodo)
         {
-            
-            
+            List<Nodo> hijos = new List<Nodo>();
+            Nodo aux = new Nodo();
+            aux = MoverArriba(nodo);
+            if (aux != null)
+            {
+                hijos.Add(aux);
+            }
+            aux = MoverAbajo(nodo);
+            if (aux != null)
+            {
+                hijos.Add(aux);
+            }
+            aux = MoverDer(nodo);
+            if (aux != null)
+            {
+                hijos.Add(aux);
+            }
+            aux = MoverIzq(nodo);
+            if (aux != null)
+            {
+                hijos.Add(aux);
+            }
+            return hijos;
         }
         public Nodo MoverIzq(Nodo nodo)
         {
             int i, j;
-            int[,] ConjuntoAux;
+            int[,] ConjuntoAux = new int [3,3];
             int aux;
             Nodo nuevo = new Nodo();
             for (i = 0; i < 3; i++)
@@ -37,21 +57,22 @@ namespace _8Puzzles
                     {
                         if (j > 0)
                         {
-                            ConjuntoAux = nodo.Conjunto;
+                            NodoAux(nodo.Conjunto, ConjuntoAux);
                             aux = ConjuntoAux[i, j - 1];
                             ConjuntoAux[i, j - 1] = 0;
                             ConjuntoAux[i, j] = aux;
                             nuevo = new Nodo(ConjuntoAux);
+                            return nuevo;
                         }
                     }
                 }
             }
-            return nuevo;
+            return null;
         }
         public Nodo MoverDer(Nodo nodo)
         {
             int i, j;
-            int[,] ConjuntoAux;
+            int[,] ConjuntoAux = new int[3, 3];
             int aux;
             Nodo nuevo = new Nodo();
             for (i = 0; i < 3; i++)
@@ -62,21 +83,22 @@ namespace _8Puzzles
                     {
                         if (j < 2)
                         {
-                            ConjuntoAux = nodo.Conjunto;
+                            NodoAux(nodo.Conjunto, ConjuntoAux);
                             aux = ConjuntoAux[i, j + 1];
                             ConjuntoAux[i, j + 1] = 0;
                             ConjuntoAux[i, j] = aux;
                             nuevo = new Nodo(ConjuntoAux);
+                            return nuevo;
                         }
                     }
                 }
             }
-            return nuevo;
+            return null;
         }
         public Nodo MoverArriba(Nodo nodo)
         {
             int i, j;
-            int[,] ConjuntoAux;
+            int[,] ConjuntoAux = new int[3, 3];
             int aux;
             Nodo nuevo = new Nodo();
             for (i = 0; i < 3; i++)
@@ -87,21 +109,22 @@ namespace _8Puzzles
                     {
                         if (i > 0)
                         {
-                            ConjuntoAux = nodo.Conjunto;
+                            NodoAux(nodo.Conjunto, ConjuntoAux);
                             aux = ConjuntoAux[i - 1, j];
-                            ConjuntoAux[i - 1, j] = 0;
+                            ConjuntoAux[i - 1, j] = ConjuntoAux[i, j];
                             ConjuntoAux[i, j] = aux;
                             nuevo = new Nodo(ConjuntoAux);
+                            return nuevo;
                         }
                     }
                 }
             }
-            return nuevo;
+            return null;
         }
         public Nodo MoverAbajo(Nodo nodo)
         {
             int i, j;
-            int[,] ConjuntoAux;
+            int[,] ConjuntoAux = new int[3, 3];
             int aux;
             Nodo nuevo = new Nodo();
             for (i = 0; i < 3; i++)
@@ -112,16 +135,27 @@ namespace _8Puzzles
                     {
                         if (i < 2)
                         {
-                            ConjuntoAux = nodo.Conjunto;
+                            NodoAux(nodo.Conjunto, ConjuntoAux);
                             aux = ConjuntoAux[i + 1, j];
                             ConjuntoAux[i + 1, j] = 0;
                             ConjuntoAux[i, j] = aux;
                             nuevo = new Nodo(ConjuntoAux);
+                            return nuevo;
                         }
                     }
                 }
             }
-            return nuevo;
+            return null;
+        }
+        public void NodoAux(int [,] original, int[,] copia)
+        {
+            for (int i = 0; i < 3; i++)
+            {  
+                for (int j = 0; j < 3; j++)
+                {
+                    copia[i, j] = original[i, j];
+                }
+            }
         }
 
     }

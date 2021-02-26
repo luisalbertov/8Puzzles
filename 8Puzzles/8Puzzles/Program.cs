@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace _8Puzzles
 {
@@ -17,22 +18,27 @@ namespace _8Puzzles
                 Console.WriteLine();
                 for (j = 0; j < 3; j++)
                 {
-                    Console.Write(objetivo[i, j]);
+                    Console.Write(nodoinicial.Conjunto[i, j]);
                 }
                 
             }
             Console.WriteLine();
-            Nodo prueba = new Nodo();
-            prueba = prueba.MoverArriba(nodoobjetivo);
 
-            for (i = 0; i < 3; i++)
+            List<Nodo> hijos = nodoinicial.ObtenerNodosHijos(nodoinicial);
+            foreach (Nodo item in hijos)
             {
-                Console.WriteLine();
-                for (j = 0; j < 3; j++)
+                for (i = 0; i < 3; i++)
                 {
-                    Console.Write(prueba.Conjunto[i, j]);
+                    Console.WriteLine();
+                    for (j = 0; j < 3; j++)
+                    {
+                        Console.Write(item.Conjunto[i, j]);
+                    }
                 }
+                Console.WriteLine();
             }
+
+
         }
     }
 }
