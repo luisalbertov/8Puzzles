@@ -23,7 +23,7 @@ namespace _8Puzzles
             }
             Console.WriteLine();
             Nodo prueba = new Nodo();
-            prueba = prueba.MoverIzq(nodoobjetivo);
+            prueba = prueba.MoverArriba(nodoobjetivo);
 
             for (i = 0; i < 3; i++)
             {
@@ -32,10 +32,7 @@ namespace _8Puzzles
                 {
                     Console.Write(prueba.Conjunto[i, j]);
                 }
-
             }
-
-
         }
     }
 }
