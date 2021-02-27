@@ -4,7 +4,7 @@ using System.Text;
 
 namespace _8Puzzles
 {
-    public class BusquedaAnchura
+    public class Busquedas
     {
         public Nodo BusquedadeAnchura(Nodo inicial, Nodo objetivo)
         {
@@ -17,30 +17,47 @@ namespace _8Puzzles
             {
                 Nodo v = cola.Dequeue();
                 Console.WriteLine("Procesando:");
-                for (int i = 0; i < 3; i++)
-                {
-                    Console.WriteLine();
-                    for (int j = 0; j < 3; j++)
-                    {
-                        Console.Write(v.Conjunto[i, j]);
-                    }
-
-                }
-                Console.WriteLine();
-                if (v.Conjunto.Equals(objetivo))
+                v.ImprimirConjunto(v);
+                if (v.Conjunto.Equals(objetivo.Conjunto))
                 {
                     return v;
                 }
-                foreach (var w in g.ObtenerNodosAdyacentes(v))
+                int compara = 9;
+                Nodo MejorOpcion = new Nodo();
+                foreach (var w in v.ObtenerNodosHijos(v))
                 {
                     if (!Visitados.Contains(w))
                     {
-                        Visitados.Add(w);
-                        cola.Enqueue(w);
+                        int resultado = Heuristica(w, objetivo);
+                        if (resultado <= compara)
+                        {
+                            compara = resultado;
+                            MejorOpcion = w;
+                        }
                     }
+                }
+                if (MejorOpcion != null)
+                {
+                    Visitados.Add(MejorOpcion);
+                    cola.Enqueue(MejorOpcion);
                 }
             }
             return null;
+        }
+        public int Heuristica(Nodo nodo, Nodo objetivo)
+        {
+            int contador=0;
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (nodo.Conjunto[i,j]!=objetivo.Conjunto[i,j])
+                    {
+                        contador++;
+                    }
+                }
+            }
+            return contador;
         }
     }
 }

@@ -161,13 +161,15 @@ namespace _8Puzzles
         {
             for (int i = 0; i < 3; i++)
             {
+                Console.WriteLine();
                 for (int j = 0; j < 3; j++)
                 {
-                    Console.Write(nodo.Conjunto[i, j]);
+                    Console.Write("  "+ nodo.Conjunto[i, j]);
                 }
             }
             Console.WriteLine();
         }
+
 
     }
 }

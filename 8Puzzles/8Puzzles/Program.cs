@@ -12,18 +12,17 @@ namespace _8Puzzles
             int[,] objetivo = new int[3, 3] { { 1, 2 ,3 }, { 4, 5, 6}, { 7, 8, 0 } };
             Nodo nodoobjetivo = new Nodo(objetivo);
 
-            int i, j;
             nodoinicial.ImprimirConjunto(nodoinicial);
             Console.WriteLine();
 
-            List<Nodo> hijos = nodoinicial.ObtenerNodosHijos(nodoinicial);
+            /*List<Nodo> hijos = nodoinicial.ObtenerNodosHijos(nodoinicial);
             foreach (Nodo item in hijos)
             {
-                for (i = 0; i < 3; i++)
-                {
-                    item.ImprimirConjunto(item);
-                }
-            }
+                   item.ImprimirConjunto(item);
+            }*/
+
+            Busquedas Anchura = new Busquedas();
+            Anchura.BusquedadeAnchura(nodoinicial, nodoobjetivo);
 
 
         }
