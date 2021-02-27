@@ -13,15 +13,7 @@ namespace _8Puzzles
             Nodo nodoobjetivo = new Nodo(objetivo);
 
             int i, j;
-            for (i = 0; i < 3; i++)
-            {
-                Console.WriteLine();
-                for (j = 0; j < 3; j++)
-                {
-                    Console.Write(nodoinicial.Conjunto[i, j]);
-                }
-                
-            }
+            nodoinicial.ImprimirConjunto(nodoinicial);
             Console.WriteLine();
 
             List<Nodo> hijos = nodoinicial.ObtenerNodosHijos(nodoinicial);
@@ -29,13 +21,8 @@ namespace _8Puzzles
             {
                 for (i = 0; i < 3; i++)
                 {
-                    Console.WriteLine();
-                    for (j = 0; j < 3; j++)
-                    {
-                        Console.Write(item.Conjunto[i, j]);
-                    }
+                    item.ImprimirConjunto(item);
                 }
-                Console.WriteLine();
             }
 
 

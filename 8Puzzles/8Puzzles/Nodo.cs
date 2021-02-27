@@ -157,6 +157,17 @@ namespace _8Puzzles
                 }
             }
         }
+        public void ImprimirConjunto (Nodo nodo)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    Console.Write(nodo.Conjunto[i, j]);
+                }
+            }
+            Console.WriteLine();
+        }
 
     }
 }
