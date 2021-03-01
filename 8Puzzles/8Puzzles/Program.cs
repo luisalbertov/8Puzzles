@@ -7,7 +7,7 @@ namespace _8Puzzles
     {
         static void Main(string[] args)
         {
-            int[,] inicio = new int[3, 3] { { 1, 2, 3 }, { 4, 5, 0 }, { 8, 6, 7 } };
+            int[,] inicio = new int[3, 3] { { 1, 2, 3 }, { 4, 8, 0 }, { 7, 6, 5 } };
             Nodo nodoinicial = new Nodo(inicio);
             int[,] objetivo = new int[3, 3] { { 1, 2 ,3 }, { 4, 5, 6}, { 7, 8, 0 } };
             Nodo nodoobjetivo = new Nodo(objetivo);

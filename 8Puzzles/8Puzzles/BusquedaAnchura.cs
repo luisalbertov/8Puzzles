@@ -18,7 +18,7 @@ namespace _8Puzzles
                 Nodo v = cola.Dequeue();
                 Console.WriteLine("Procesando:");
                 v.ImprimirConjunto(v);
-                if (v.Conjunto.Equals(objetivo.Conjunto))
+                if (v.CompararNodos(v, objetivo))
                 {
                     return v;
                 }
@@ -26,7 +26,7 @@ namespace _8Puzzles
                 Nodo MejorOpcion = new Nodo();
                 foreach (var w in v.ObtenerNodosHijos(v))
                 {
-                    if (!Visitados.Contains(w))
+                    if (!NodosVisitados(w, Visitados))
                     {
                         int resultado = Heuristica(w, objetivo);
                         if (resultado <= compara)
@@ -58,6 +58,18 @@ namespace _8Puzzles
                 }
             }
             return contador;
+        }
+        public bool NodosVisitados(Nodo nodo, List<Nodo> visitados)
+        {
+            foreach (Nodo nodovi in visitados)
+            {
+                bool compara=nodo.CompararNodos(nodo, nodovi);
+                if (compara==true)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

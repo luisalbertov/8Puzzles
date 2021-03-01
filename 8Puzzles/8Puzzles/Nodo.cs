@@ -169,7 +169,20 @@ namespace _8Puzzles
             }
             Console.WriteLine();
         }
-
+        public bool CompararNodos (Nodo nodo1, Nodo nodo2)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (nodo1.Conjunto[i,j]!=nodo2.Conjunto[i,j])
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
 
     }
 }
