@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace _8Puzzles
@@ -12,18 +13,22 @@ namespace _8Puzzles
             List<Nodo> Visitados = new List<Nodo>();
             Visitados.Add(inicial);
             cola.Enqueue(inicial);
+            int mov = 0;
 
             while (cola.Count > 0)
             {
                 Nodo v = cola.Dequeue();
-                Console.WriteLine("Procesando:");
+                Console.WriteLine("\n Movimiento: "+mov);
+                mov++;
                 v.ImprimirConjunto(v);
                 if (v.CompararNodos(v, objetivo))
                 {
+                    Console.WriteLine("\n Objetivo encontrado!!");
                     return v;
                 }
                 int compara = 9;
                 Nodo MejorOpcion = new Nodo();
+                bool entro = false;
                 foreach (var w in v.ObtenerNodosHijos(v))
                 {
                     if (!NodosVisitados(w, Visitados))
@@ -33,13 +38,67 @@ namespace _8Puzzles
                         {
                             compara = resultado;
                             MejorOpcion = w;
-                        }
+                            entro = true;
+                        } 
                     }
                 }
-                if (MejorOpcion != null)
+                if (entro)
                 {
                     Visitados.Add(MejorOpcion);
                     cola.Enqueue(MejorOpcion);
+                }
+                else
+                {
+                    Console.WriteLine("\n Objetivo no encontrado");
+                    return null;
+                }
+            }
+            return null;
+        }
+        public Nodo BusquedaAEstrella(Nodo inicial, Nodo objetivo)
+        {
+            Queue<Nodo> cola = new Queue<Nodo>();
+            List<Nodo> Cerrada = new List<Nodo>();
+            List<Nodo> Abierta = new List<Nodo>(); 
+            Abierta.Add(inicial);
+            int mov = 0;
+
+            while (Abierta.Count > 0)
+            {
+                
+                Console.WriteLine("\n Movimiento: " + mov);
+                mov++;
+                v.ImprimirConjunto(v);
+                if (v.CompararNodos(v, objetivo))
+                {
+                    Console.WriteLine("\n Objetivo encontrado!!");
+                    return v;
+                }
+                int compara = 9;
+                Nodo MejorOpcion = new Nodo();
+                bool entro = false;
+                foreach (var w in v.ObtenerNodosHijos(v))
+                {
+                    if (!NodosVisitados(w, Cerrada))
+                    {
+                        int resultado = Heuristica(w, objetivo);
+                        if (resultado <= compara)
+                        {
+                            compara = resultado;
+                            MejorOpcion = w;
+                            entro = true;
+                        }
+                    }
+                }
+                if (entro)
+                {
+                    Cerrada.Add(MejorOpcion);
+                    cola.Enqueue(MejorOpcion);
+                }
+                else
+                {
+                    Console.WriteLine("\n Objetivo no encontrado");
+                    return null;
                 }
             }
             return null;
@@ -70,6 +129,84 @@ namespace _8Puzzles
                 }
             }
             return false;
+        }
+
+        public Nodo BusquedadeProfundidad(Nodo inicial, Nodo objetivo)
+        {
+            Stack<Nodo> pila = new Stack<Nodo>();
+            List<Nodo> Visitados = new List<Nodo>();
+            Visitados.Add(inicial);
+            pila.Push(inicial);
+            int mov = 0;
+
+            while (pila.Count > 0)
+            {
+                Nodo v = pila.Pop();
+                Console.WriteLine("\n Movimiento: " + mov);
+                mov++;
+                v.ImprimirConjunto(v);
+                if (v.CompararNodos(v, objetivo))
+                {
+                    Console.WriteLine("\n Objetivo encontrado!!");
+                    return v;
+                }
+                int compara = 9;
+                Nodo MejorOpcion = new Nodo();
+                bool entro = false;
+                foreach (var w in v.ObtenerNodosHijos(v))
+                {
+                    if (!NodosVisitados(w, Visitados))
+                    {
+                        int resultado = Heuristica(w, objetivo);
+                        if (resultado <= compara)
+                        {
+                            compara = resultado;
+                            MejorOpcion = w;
+                            entro = true;
+                        }
+                    }
+                }
+                if (entro)
+                {
+                    Visitados.Add(MejorOpcion);
+                    pila.Push(MejorOpcion);
+                }
+                else
+                {
+                    Console.WriteLine("\n Objetivo no encontrado");
+                    return null;
+                }
+            }
+            return null;
+        }
+        public Nodo BusquedaAnchura(Nodo inicial, Nodo objetivo)
+        {
+            Queue<Nodo> cola = new Queue<Nodo>();
+            List<Nodo> Visitados = new List<Nodo>();
+            Visitados.Add(inicial);
+            cola.Enqueue(inicial);
+            int mov = 0;
+            while (cola.Count > 0)
+            {
+                Nodo v = cola.Dequeue();
+                Console.WriteLine("\n Movimiento: " + mov);
+                mov++;
+                v.ImprimirConjunto(v);
+                if (v.CompararNodos(v, objetivo))
+                {
+                    Console.WriteLine("\n Objetivo encontrado!!");
+                    return v;
+                }
+                foreach (var w in v.ObtenerNodosHijos(v))
+                {
+                    if (!NodosVisitados(w, Visitados))
+                    {
+                        Visitados.Add(w);
+                        cola.Enqueue(w);
+                    }
+                }
+            }
+            return null;
         }
     }
 }
