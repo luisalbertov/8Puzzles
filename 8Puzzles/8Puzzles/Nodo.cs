@@ -7,6 +7,7 @@ namespace _8Puzzles
     public class Nodo
     {
         public int[,] Conjunto = new int[3, 3];
+        public int g, h, f;
 
         public Nodo(int[,] Conjunto)
         {

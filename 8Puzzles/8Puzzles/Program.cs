@@ -15,14 +15,15 @@ namespace _8Puzzles
             int[,] facil1 = new int[3, 3] { { 1, 2, 3 }, { 0, 4, 6 }, {7, 5, 8 } };
             Nodo nodofacil1 = new Nodo(facil1);
 
-            int[,] medio = new int[3, 3] { { 1, 2, 0 }, { 3, 4, 6 }, { 7, 8, 5 } };
+            int[,] medio = new int[3, 3] { { 1, 3, 2 }, { 4, 5, 3 }, { 7, 8, 0 } };
             Nodo nodomedio = new Nodo(medio);
 
             Busquedas Anchura = new Busquedas();
-            Anchura.BusquedaAnchura(nodomedio, nodoobjetivo);
-            //Anchura.BusquedadeProfundidad(nodomedio, nodoobjetivo);
-
-
+            //Anchura.BusquedadeAnchura(nodofacil1, nodoobjetivo);
+            //Anchura.BusquedadeProfundidad(nodofacil1, nodoobjetivo);
+            List<Nodo> result = new List<Nodo>();
+            Anchura.BusquedaAEstrella(nodofacil, nodoobjetivo);
+            
         }
     }
 }
